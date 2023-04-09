@@ -1,0 +1,7 @@
+{
+    "cache_time": "10m",
+    "locations": {
+        "/debian/": "http://deb.debian.org/debian/",
+        "/ubuntu/": "http://au.archive.ubuntu.com/ubuntu/"
+    }
+}
