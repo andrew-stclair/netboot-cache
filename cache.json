@@ -3,6 +3,6 @@
     "cache_max_size": "20g",
     "locations": {
         "/debian/": "http://deb.debian.org/debian/",
-        "/ubuntu/": "http://au.archive.ubuntu.com/ubuntu/"
+        "/ubuntu/": "http://archive.ubuntu.com/ubuntu/"
     }
 }
