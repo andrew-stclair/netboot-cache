@@ -1,0 +1,62 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "*.md"
+      - "docs/**"
+      - "examples/**"
+  workflow_dispatch:
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Get Vars
+        id: vars
+        run: |
+          echo "rfc3339=$(date --rfc-3339=seconds | sed 's/ /T/')Z" >> "$GITHUB_OUTPUT"
+          echo "week_of_year=$(date +'%Y%U')" >> "$GITHUB_OUTPUT"
+
+      - name: Generate nginx config
+        run: python3 cache.py
+
+      - name: Login to Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Push Dockerfile
+        id: docker_build
+        uses: docker/build-push-action@v3.2.0
+        with:
+          platforms: linux/arm64,linux/armhf,linux/386,linux/amd64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}:latest
+            ghcr.io/${{ github.repository }}:${{steps.vars.outputs.week_of_year}}
+          labels: |
+            org.opencontainers.artifact.created:${{steps.vars.outputs.rfc3339}}
+            org.opencontainers.artifact.description:nginx cache server
+            org.opencontainers.image.created:${{steps.vars.outputs.rfc3339}}
+            org.opencontainers.image.authors:${AUTHOR}
+            org.opencontainers.image.url:https://github.com/${{ github.repository }}
+            org.opencontainers.image.source:https://github.com/${{ github.repository }}
+            org.opencontainers.image.version:${{ github.sha }}
+            org.opencontainers.image.revision:${{ github.sha }}
+            org.opencontainers.image.title:nginx cache server
+            org.opencontainers.image.description:nginx cache server built on alpine:latest
+            org.opencontainers.image.base.name:docker.io/alpine:latest
+          pull: false
+          context: .
