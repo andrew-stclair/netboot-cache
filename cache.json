@@ -2,7 +2,25 @@
     "cache_zone_size": "16m",
     "cache_max_size": "20g",
     "locations": {
+        "/live-endpoint/": "https://github.com/netbootxyz/",
+        "/almalinux/": "http://repo.almalinux.org/almalinux/",
+        "/alpine/": "http://dl-cdn.alpinelinux.org/alpine/",
+        "/archlinux/": "http://mirrors.kernel.org/archlinux/",
+        "/centos/": "http://mirror.centos.org/centos/",
         "/debian/": "http://deb.debian.org/debian/",
+        "/devuan/": "http://deb.devuan.org/devuan/",
+        "/fedora/": "http://mirrors.kernel.org/fedora/",
+        "/prod/streams/": "http://builds.coreos.fedoraproject.org/prod/streams/",
+        "/pub/micro/pc-stuff/freedos/files/distributions/1.3/official/": "http://www.ibiblio.org/pub/micro/pc-stuff/freedos/files/distributions/1.3/official/",
+        "/releases/ipfire-2.x/": "https://downloads.ipfire.org/releases/ipfire-2.x/",
+        "/kali/": "http://http.kali.org/kali/",
+        "/mageia/": "http://mirrors.kernel.org/mageia/",
+        "/pub/OpenBSD/": "http://ftp.openbsd.org/pub/OpenBSD/",
+        "/distribution/leap/": "http://download.opensuse.org/distribution/leap/",
+        "/pub/rocky/": "http://download.rockylinux.org/pub/rocky/",
+        "/linux/scientific/": "http://ftp1.scientificlinux.org/linux/scientific/",
+        "/slackware/": "http://mirrors.kernel.org/slackware/",
+        "/platform/i86pc/": "https://netboot.joyent.com/os/platform/i86pc/",
         "/ubuntu/": "http://archive.ubuntu.com/ubuntu/"
     }
 }
