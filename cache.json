@@ -1,6 +1,6 @@
 {
     "cache_zone_size": "16m",
-    "cache_max_size": "20g",
+    "cache_max_size": "50g",
     "locations": {
         "/live-endpoint/": "https://github.com/netbootxyz/",
         "/almalinux/": "http://repo.almalinux.org/almalinux/",
