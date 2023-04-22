@@ -4,7 +4,9 @@
 		"vscode": {
 			"extensions": [
 				"ms-azuretools.vscode-docker",
-				"yzhang.markdown-all-in-one"
+				"yzhang.markdown-all-in-one",
+				"ms-python.python",
+				"ms-python.pylint"
 			]
 		}
 	}
