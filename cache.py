@@ -49,7 +49,7 @@ NGINX_CONFIG += "        add_header Cache-Control \"public\";\n"
 for location in config['locations']:
     NGINX_CONFIG += f"        location {location} {{\n"
     NGINX_CONFIG += f"            proxy_pass {config['locations'][location]};\n"
-    NGINX_CONFIG += "            proxy_redirect off;\n"
+    NGINX_CONFIG += "            proxy_redirect default;\n"
     NGINX_CONFIG += "        }\n"
 
 NGINX_CONFIG += "        proxy_hide_header Cache-Control;\n"
