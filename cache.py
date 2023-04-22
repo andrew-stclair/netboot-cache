@@ -35,14 +35,18 @@ NGINX_CONFIG += "        worker_connections 1024;\n"
 NGINX_CONFIG += "}\n"
 NGINX_CONFIG += "\n"
 NGINX_CONFIG += "http {\n"
-NGINX_CONFIG += f"    proxy_cache_path /cache keys_zone=cache:{config['cache_zone_size']} max_size={config['cache_max_size']};\n"
+NGINX_CONFIG += f"    proxy_cache_path /cache levels=1:2 keys_zone=cache:{config['cache_zone_size']} max_size={config['cache_max_size']} inactive=900m use_temp_path=off;\n"
 NGINX_CONFIG += "    server {\n"
 NGINX_CONFIG += "        proxy_cache cache;\n"
-NGINX_CONFIG += "        sub_filter_once off;\n"
+NGINX_CONFIG += "        proxy_cache_revalidate on;\n"
+NGINX_CONFIG += "        proxy_cache_use_stale error timeout updating http_500 http_502 http_503 http_504;\n"
+NGINX_CONFIG += "        proxy_cache_background_update on;\n"
+NGINX_CONFIG += "        proxy_cache_lock on;\n"
 
 for location in config['locations']:
     NGINX_CONFIG += f"        sub_filter {config['locations'][location]} {location};\n"
 
+NGINX_CONFIG += "        sub_filter_once off;\n"
 NGINX_CONFIG += "        access_log on;\n"
 NGINX_CONFIG += "        add_header Cache-Control \"public\";\n"
 
