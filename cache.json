@@ -3,6 +3,7 @@
     "cache_max_size": "50g",
     "locations": {
         "/live-endpoint/": "https://github.com/netbootxyz/",
+        "/ghuc/": "https://objects.githubuserecontent.com/",
         "/almalinux/": "http://repo.almalinux.org/almalinux/",
         "/alpine/": "http://dl-cdn.alpinelinux.org/alpine/",
         "/archlinux/": "http://mirrors.kernel.org/archlinux/",
