@@ -41,7 +41,8 @@ NGINX_CONFIG += "        proxy_cache cache;\n"
 NGINX_CONFIG += "        sub_filter_once off;\n"
 
 for location in config['locations']:
-    NGINX_CONFIG += f"        sub_filter \"{config['locations'][location]}\" \"{location}\";\n"
+    NGINX_CONFIG += f"        sub_filter {config['locations'][location]} {location};\n"
+#    NGINX_CONFIG += f"        proxy_redirect {config['locations'][location]} {location};\n"
 
 NGINX_CONFIG += "        access_log on;\n"
 NGINX_CONFIG += "        add_header Cache-Control \"public\";\n"
@@ -49,8 +50,15 @@ NGINX_CONFIG += "        add_header Cache-Control \"public\";\n"
 for location in config['locations']:
     NGINX_CONFIG += f"        location {location} {{\n"
     NGINX_CONFIG += f"            proxy_pass {config['locations'][location]};\n"
-    NGINX_CONFIG += "            proxy_redirect default;\n"
+    NGINX_CONFIG += "            proxy_intercept_errors on;\n"
+    NGINX_CONFIG += "            error_page 301 302 307 = @handle_redirects;\n"
     NGINX_CONFIG += "        }\n"
+
+NGINX_CONFIG += "        location @handle_redirects {\n"
+NGINX_CONFIG += "            resolver 1.1.1.1;\n"
+NGINX_CONFIG += "            set $saved_redirect_location '$upstream_http_location';\n"
+NGINX_CONFIG += "            proxy_pass $saved_redirect_location;\n"
+NGINX_CONFIG += "        }\n"
 
 NGINX_CONFIG += "        proxy_hide_header Cache-Control;\n"
 NGINX_CONFIG += "        proxy_hide_header Content-Security-Policy;\n"
