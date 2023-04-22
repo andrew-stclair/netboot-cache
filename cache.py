@@ -42,7 +42,6 @@ NGINX_CONFIG += "        sub_filter_once off;\n"
 
 for location in config['locations']:
     NGINX_CONFIG += f"        sub_filter {config['locations'][location]} {location};\n"
-#    NGINX_CONFIG += f"        proxy_redirect {config['locations'][location]} {location};\n"
 
 NGINX_CONFIG += "        access_log on;\n"
 NGINX_CONFIG += "        add_header Cache-Control \"public\";\n"
