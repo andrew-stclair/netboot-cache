@@ -16,6 +16,7 @@
         "/kali/": "http://http.kali.org/kali/",
         "/mageia/": "http://mirrors.kernel.org/mageia/",
         "/pub/OpenBSD/": "http://ftp.openbsd.org/pub/OpenBSD/",
+        "/openeuler/": "http://repo.openeuler.org",
         "/distribution/leap/": "http://download.opensuse.org/distribution/leap/",
         "/pub/rocky/": "http://download.rockylinux.org/pub/rocky/",
         "/linux/scientific/": "http://ftp1.scientificlinux.org/linux/scientific/",

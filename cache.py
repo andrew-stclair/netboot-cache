@@ -38,21 +38,23 @@ NGINX_CONFIG += "http {\n"
 NGINX_CONFIG += f"    proxy_cache_path /cache keys_zone=cache:{config['cache_zone_size']} max_size={config['cache_max_size']};\n"
 NGINX_CONFIG += "    server {\n"
 NGINX_CONFIG += "        proxy_cache cache;\n"
+NGINX_CONFIG += "        sub_filter_once off;\n"
+
+for location in config['locations']:
+    NGINX_CONFIG += f"        sub_filter \"{config['locations'][location]}\" \"{location}\";\n"
+
+NGINX_CONFIG += "        access_log on;\n"
+NGINX_CONFIG += "        add_header Cache-Control \"public\";\n"
 
 for location in config['locations']:
     NGINX_CONFIG += f"        location {location} {{\n"
-    NGINX_CONFIG += "            access_log on;\n"
-    NGINX_CONFIG += "            add_header Cache-Control \"public\";\n"
     NGINX_CONFIG += f"            proxy_pass {config['locations'][location]};\n"
     NGINX_CONFIG += "            proxy_redirect off;\n"
-    NGINX_CONFIG += f"            sub_filter \"{config['locations'][location]}\" \"{location}\";\n"
-    NGINX_CONFIG += "            sub_filter_once off;\n"
-    NGINX_CONFIG += "            proxy_hide_header Location;\n"
-    NGINX_CONFIG += "            proxy_hide_header Cache-Control;\n"
-    NGINX_CONFIG += "            proxy_hide_header Content-Security-Policy;\n"
-    NGINX_CONFIG += "            proxy_hide_header X-GitHub-Request-Id;\n"
     NGINX_CONFIG += "        }\n"
 
+NGINX_CONFIG += "        proxy_hide_header Cache-Control;\n"
+NGINX_CONFIG += "        proxy_hide_header Content-Security-Policy;\n"
+NGINX_CONFIG += "        proxy_hide_header X-GitHub-Request-Id;\n"
 NGINX_CONFIG += "    }\n"
 NGINX_CONFIG += "}\n"
 NGINX_CONFIG += "\n"
