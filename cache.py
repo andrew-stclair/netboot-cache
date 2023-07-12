@@ -42,7 +42,6 @@ NGINX_CONFIG += "        add_header Cache-Control \"public\";\n"
 for location in config['locations']:
     NGINX_CONFIG += f"        location {location} {{\n"
     NGINX_CONFIG += "            resolver 1.1.1.1 valid=60s;\n"
-    NGINX_CONFIG += f"            set {config['locations'][location]} {config['locations'][location]};\n"
     NGINX_CONFIG += f"            proxy_pass {config['locations'][location]};\n"
     NGINX_CONFIG += "            proxy_cache cache;\n"
     NGINX_CONFIG += "            proxy_read_timeout 120s;\n"
