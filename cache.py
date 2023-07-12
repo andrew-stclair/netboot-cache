@@ -3,12 +3,11 @@ import requests
 
 config = json.loads(open("cache.json", encoding="utf-8").read())
 
-MENUVER = requests.get(
-    "https://api.github.com/repos/netbootxyz/netboot.xyz/releases/latest",
-    timeout=15).json()['tag_name']
-
 # This makes netboot fail
-#config['locations']['/sigs/'] = f"http://boot.netboot.xyz/{MENUVER}/sigs/"
+# MENUVER = requests.get(
+#     "https://api.github.com/repos/netbootxyz/netboot.xyz/releases/latest",
+#     timeout=15).json()['tag_name']
+# config['locations']['/sigs/'] = f"http://boot.netboot.xyz/{MENUVER}/sigs/"
 
 NGINX_CONFIG = "user nginx;\n"
 NGINX_CONFIG += "worker_processes auto;\n"
