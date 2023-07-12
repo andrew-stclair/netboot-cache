@@ -7,7 +7,8 @@ MENUVER = requests.get(
     "https://api.github.com/repos/netbootxyz/netboot.xyz/releases/latest",
     timeout=15).json()['tag_name']
 
-config['locations']['/sigs/'] = f"http://boot.netboot.xyz/{MENUVER}/sigs/"
+# This makes netboot fail
+#config['locations']['/sigs/'] = f"http://boot.netboot.xyz/{MENUVER}/sigs/"
 
 NGINX_CONFIG = "user nginx;\n"
 NGINX_CONFIG += "worker_processes auto;\n"
