@@ -1,5 +1,6 @@
+"""Build the nginx config using the json file"""
 import json
-import requests
+#import requests
 
 config = json.loads(open("cache.json", encoding="utf-8").read())
 
