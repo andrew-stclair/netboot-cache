@@ -34,7 +34,7 @@ NGINX_CONFIG += "    #tcp_nopush     on;\n"
 NGINX_CONFIG += "    keepalive_timeout  65;\n"
 NGINX_CONFIG += "    gzip on;\n"
 NGINX_CONFIG += "    proxy_force_ranges on;\n"
-NGINX_CONFIG += f"    proxy_cache_path /cache levels=1:2 keys_zone=cache:{config['cache_zone_size']} max_size={config['cache_max_size']} inactive=900m use_temp_path=off loader_threshold=200 loader_files=100 loader_sleeps=50 purger=on;\n"
+NGINX_CONFIG += f"    proxy_cache_path /cache levels=1:2 keys_zone=cache:{config['cache_zone_size']} max_size={config['cache_max_size']} inactive=900m use_temp_path=off purger=on;\n"
 NGINX_CONFIG += "    server {\n"
 
 for location in config['locations']:
